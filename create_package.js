@@ -17,7 +17,7 @@ targetPkgJson.dependencies = {};
 });
 
 // add schematics entry
-targetPkgJson['schematics'] = 'collection.json';
+targetPkgJson['schematics'] = './collection.json';
 
 // add keywords (https://twitter.com/stephenfluin/status/981979735839277056)
 targetPkgJson.keywords = ['angular', 'ng-bootstrap', 'ng-add'];
