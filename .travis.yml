@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - 10
+
+sudo: false
+cache: yarn
+
+install:
+  - yarn install
+
+script:
+  - yarn build # we build just to validate it can build, yarn test does not need build (ts-jest will compile)
+  - yarn test

@@ -1,58 +1,28 @@
-import {Rule, Tree, chain, SchematicContext} from '@angular-devkit/schematics';
-import {NodePackageInstallTask} from '@angular-devkit/schematics/tasks';
-import {addPackageToPackageJson} from './../utils/package';
-import {addModuleImportToRootModule} from './../utils/ast';
-import {addStyle} from './../utils/config';
+import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 
-// TODO(PK): hard-code for now, will query npm repo to get this info in the future
-const ngBootstrapVersion = '2.0.0-alpha.0';
-const bootstrapVersion = '4.0.0';
+import { addPackageToPackageJson } from '../utils/package-config';
+import { Schema } from './schema';
 
-function addNgBootstrapToPackageJson(): Rule {
-  return (host: Tree) => {
-    addPackageToPackageJson(host, 'dependencies', '@ng-bootstrap/ng-bootstrap', `^${ngBootstrapVersion}`);
-    return host;
-  };
-}
+const NG_BOOTSTRAP_VERSION = "4.0.0";
+const BOOTSTRAP_VERSION = "4.0.0";
 
-function addNgBootstrapModuleToAppModule(): Rule {
-  return (host: Tree) => {
-    addModuleImportToRootModule(host, 'NgbModule.forRoot()', '@ng-bootstrap/ng-bootstrap');
-    return host;
-  };
-}
-
-function addBootstrapToPackageJson(): Rule {
-  return (host: Tree) => {
-    addPackageToPackageJson(host, 'dependencies', 'bootstrap', `^${bootstrapVersion}`);
-    return host;
-  };
-}
-
-function addBootstrapCSS(): Rule {
-  return (host: Tree) => {
-    addStyle(host, './node_modules/bootstrap/dist/css/bootstrap.css');
-    return host;
-  };
-}
-
-function installNodeDeps() {
+/**
+ * Schematic factory entry-point for the `ng-add` schematic. The ng-add schematic will be
+ * automatically executed if developers run `ng add @ng-bootstrap/schematics`.
+ */
+export default function ngAdd(options: Schema): Rule {
   return (host: Tree, context: SchematicContext) => {
-    context.addTask(new NodePackageInstallTask());
-  }
-}
+    addPackageToPackageJson(
+      host,
+      "@ng-bootstrap/ng-bootstrap",
+      `^${NG_BOOTSTRAP_VERSION}`
+    );
 
-export default function ngAdd(): Rule {
-  return chain([
-    // ng-bootstrap part
-    addNgBootstrapToPackageJson(),
-    addNgBootstrapModuleToAppModule(),
+    addPackageToPackageJson(host, "bootstrap", `^${BOOTSTRAP_VERSION}`);
 
-    // Bootstrap CSS part
-    addBootstrapToPackageJson(),
-    addBootstrapCSS(),
-
-    // install freshly added dependencies
-    installNodeDeps()
-  ]);
+    context.addTask(new RunSchematicTask("ng-add-setup-project", options), [
+      context.addTask(new NodePackageInstallTask()),
+    ]);
+  };
 }
