@@ -115,7 +115,7 @@ function addCSSFileToTarget(options: Schema, host: Tree, assetPath: string) {
     const existingStyles = targetOptions.styles.map(s =>
       typeof s === "string" ? s : s.input
     );
-    for (let [, stylePath] of existingStyles.entries()) {
+    for (const [, stylePath] of existingStyles.entries()) {
       // If the given asset is already specified in the styles, we don't need to do anything.
       if (stylePath === assetPath) {
         return;
