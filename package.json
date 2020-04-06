@@ -3,6 +3,10 @@
   "version": "4.0.0",
   "description": "ng-bootstrap schematics collection for angular-cli",
   "author": "https://github.com/ng-bootstrap/schematics/graphs/contributors",
+  "engines": {
+    "node": ">=12.10",
+    "yarn": ">=1.15.2 <2.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ng-bootstrap/schematics.git"
@@ -17,6 +21,7 @@
   ],
   "homepage": "https://github.com/ng-bootstrap/schematics#readme",
   "scripts": {
+    "preinstall": "node scripts/preinstall.js",
     "test": "jest",
     "clean": "rm -Rf dist",
     "build": "yarn clean && mkdir -p dist && node scripts/create_package.js && tsc -p tsconfig.json"
