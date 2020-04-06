@@ -14,3 +14,7 @@ ng add @ng-bootstrap/schematics
 ```
 
 Your app has now been ng-bootstrapped !
+
+## Contributing
+
+Please check [`DEVELOPER.md`](DEVELOPER.md) for developer documentation
