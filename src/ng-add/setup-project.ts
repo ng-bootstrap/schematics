@@ -1,4 +1,9 @@
-import { chain, Rule, SchematicsException, Tree } from '@angular-devkit/schematics';
+import {
+  chain,
+  Rule,
+  SchematicsException,
+  Tree,
+} from '@angular-devkit/schematics';
 import { addImportToModule } from '@schematics/angular/utility/ast-utils';
 import { InsertChange } from '@schematics/angular/utility/change';
 import { getWorkspace } from '@schematics/angular/utility/config';
@@ -11,9 +16,9 @@ import { getProjectStyleFile } from '../utils/project-style';
 import { getProjectTargetOptions } from '../utils/project-targets';
 import { Schema } from './schema';
 
-const NG_BOOTSTRAP_MODULE_NAME = "NgbModule";
-const NG_BOOTSTRAP_PACKAGE_NAME = "@ng-bootstrap/ng-bootstrap";
-const BOOTSTRAP_CSS_FILEPATH = "node_modules/bootstrap/dist/css/bootstrap.css";
+const NG_BOOTSTRAP_MODULE_NAME = 'NgbModule';
+const NG_BOOTSTRAP_PACKAGE_NAME = '@ng-bootstrap/ng-bootstrap';
+const BOOTSTRAP_CSS_FILEPATH = 'node_modules/bootstrap/dist/css/bootstrap.css';
 const BOOTSTRAP_STYLE_IMPORT = `
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
@@ -26,7 +31,7 @@ function addNgBootstrapModuleToAppModule(options: Schema) {
       workspace,
       options.project || workspace.defaultProject!
     );
-    const buildOptions = getProjectTargetOptions(project, "build");
+    const buildOptions = getProjectTargetOptions(project, 'build');
 
     const modulePath = getAppModulePath(host, buildOptions.main);
 
@@ -37,7 +42,7 @@ function addNgBootstrapModuleToAppModule(options: Schema) {
 
     const source = ts.createSourceFile(
       modulePath,
-      text.toString("utf-8"),
+      text.toString('utf-8'),
       ts.ScriptTarget.Latest,
       true
     );
@@ -74,13 +79,13 @@ function addBootstrapStyle(options: Schema) {
       const schematicsConfig = project.schematics;
       if (
         schematicsConfig &&
-        schematicsConfig["@schematics/angular:component"]
+        schematicsConfig['@schematics/angular:component']
       ) {
-        const { styleext } = schematicsConfig["@schematics/angular:component"];
+        const { styleext } = schematicsConfig['@schematics/angular:component'];
         useBootstrapSCSS =
           styleext &&
           `.${styleext}` === path.extname(styleFilePath) &&
-          styleext === "scss";
+          styleext === 'scss';
       }
 
       if (useBootstrapSCSS) {
@@ -94,7 +99,7 @@ function addBootstrapStyle(options: Schema) {
 }
 
 function injectBootstrapIntoStyleFile(host: Tree, styleFilePath: string) {
-  const styleContent = host.read(styleFilePath)!.toString("utf-8");
+  const styleContent = host.read(styleFilePath)!.toString('utf-8');
 
   const recorder = host.beginUpdate(styleFilePath);
   recorder.insertRight(styleContent.length, BOOTSTRAP_STYLE_IMPORT);
@@ -108,12 +113,12 @@ function addCSSFileToTarget(options: Schema, host: Tree, assetPath: string) {
     workspace,
     options.project || workspace.defaultProject!
   );
-  const targetOptions = getProjectTargetOptions(project, "build");
+  const targetOptions = getProjectTargetOptions(project, 'build');
   if (!targetOptions.styles) {
     targetOptions.styles = [assetPath];
   } else {
-    const existingStyles = targetOptions.styles.map(s =>
-      typeof s === "string" ? s : s.input
+    const existingStyles = targetOptions.styles.map((s) =>
+      typeof s === 'string' ? s : s.input
     );
     for (const [, stylePath] of existingStyles.entries()) {
       // If the given asset is already specified in the styles, we don't need to do anything.
@@ -123,7 +128,7 @@ function addCSSFileToTarget(options: Schema, host: Tree, assetPath: string) {
     }
     targetOptions.styles.unshift(assetPath);
   }
-  host.overwrite("angular.json", JSON.stringify(workspace, null, 2));
+  host.overwrite('angular.json', JSON.stringify(workspace, null, 2));
 }
 
 /**
