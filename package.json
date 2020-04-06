@@ -23,8 +23,10 @@
   "scripts": {
     "preinstall": "node scripts/preinstall.js",
     "test": "jest",
+    "lint": "tslint -p tsconfig.json",
     "clean": "rm -Rf dist",
-    "build": "yarn clean && mkdir -p dist && node scripts/create_package.js && tsc -p tsconfig.json"
+    "build": "yarn clean && mkdir -p dist && node scripts/create_package.js && tsc -p tsconfig.json",
+    "ci": "yarn lint && yarn build && yarn test"
   },
   "dependencies": {
     "@angular-devkit/core": "^7.0.6",
@@ -39,6 +41,7 @@
     "@commitlint/config-angular": "8.3.4",
     "husky": "4.0.7",
     "jest": "23.6.0",
-    "ts-jest": "23.10.5"
+    "ts-jest": "23.10.5",
+    "tslint": "^6.1.1"
   }
 }

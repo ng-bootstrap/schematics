@@ -6,8 +6,7 @@ sudo: false
 cache: yarn
 
 install:
-  - yarn install
+  - yarn
 
 script:
-  - yarn build # we build just to validate it can build, yarn test does not need build (ts-jest will compile)
-  - yarn test
+  - yarn ci
