@@ -1,6 +1,6 @@
 # Developer Guide
 
-1. Make sure `node` is installed with a version at _least_ 10.0.0
+1. Make sure `node` is installed with a version at _least_ 12
 2. We are using `yarn`, make sure you have it installed.
 3. We recommand using `nvm` to manage different node versions locally.
 4. Fork and clone to your machine the `ng-bootstrap/schematics` repository.
@@ -26,3 +26,7 @@ In order to test locally on a given Angular CLI application, you must install gl
 By default, `schematics` will behave as Angular CLI, expect a few different default values such as `--debug` mode which is active, and `--dry-run` which is `false`.
 
 For more options, checkout `schematics` documentation with `schematics --help`
+
+### CI
+
+Please run `yarn ci` to check all integration tasks locally
