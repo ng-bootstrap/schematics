@@ -17,16 +17,16 @@ export function getProjectStyleFile(
   project: WorkspaceProject,
   extension?: string
 ): string | null {
-  const buildOptions = getProjectTargetOptions(project, "build");
+  const buildOptions = getProjectTargetOptions(project, 'build');
 
   if (buildOptions.styles && buildOptions.styles.length) {
-    const styles = buildOptions.styles.map(s =>
-      typeof s === "string" ? s : s.input
+    const styles = buildOptions.styles.map((s) =>
+      typeof s === 'string' ? s : s.input
     );
 
     // Look for the default style file that is generated for new projects by the Angular CLI. This
     // default style file is usually called `styles.ext` unless it has been changed explicitly.
-    const defaultMainStylePath = styles.find(file =>
+    const defaultMainStylePath = styles.find((file) =>
       extension
         ? file === `styles.${extension}`
         : defaultStyleFileRegex.test(file)
@@ -39,7 +39,7 @@ export function getProjectStyleFile(
     // If no default style file could be found, use the first style file that matches the given
     // extension. If no extension specified explicitly, we look for any file with a valid style
     // file extension.
-    const fallbackStylePath = styles.find(file =>
+    const fallbackStylePath = styles.find((file) =>
       extension
         ? file.endsWith(`.${extension}`)
         : validStyleFileRegex.test(file)

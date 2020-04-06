@@ -1,4 +1,7 @@
-import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
+import {
+  SchematicTestRunner,
+  UnitTestTree,
+} from '@angular-devkit/schematics/testing';
 
 /** Create a base app used for testing. */
 export function createTestApp(
@@ -6,19 +9,19 @@ export function createTestApp(
   appOptions = {}
 ): UnitTestTree {
   const workspaceTree = runner.runExternalSchematic(
-    "@schematics/angular",
-    "workspace",
+    '@schematics/angular',
+    'workspace',
     {
-      name: "workspace",
-      version: "6.0.0",
-      newProjectRoot: "projects",
+      name: 'workspace',
+      version: '6.0.0',
+      newProjectRoot: 'projects',
     }
   );
 
   return runner.runExternalSchematic(
-    "@schematics/angular",
-    "application",
-    { name: "ngb-bootstrap", ...appOptions },
+    '@schematics/angular',
+    'application',
+    { name: 'ngb-bootstrap', ...appOptions },
     workspaceTree
   );
 }
