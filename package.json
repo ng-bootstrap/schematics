@@ -1,6 +1,6 @@
 {
   "name": "@ng-bootstrap/schematics",
-  "version": "2.0.0-alpha.1",
+  "version": "4.0.0",
   "description": "ng-bootstrap schematics collection for angular-cli",
   "author": "https://github.com/ng-bootstrap/schematics/graphs/contributors",
   "repository": {
@@ -11,16 +11,26 @@
   "bugs": {
     "url": "https://github.com/ng-bootstrap/schematics/issues"
   },
+  "keywords": [
+    "angular",
+    "ng-bootstrap"
+  ],
   "homepage": "https://github.com/ng-bootstrap/schematics#readme",
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "rm -rf dist && tsc && node ./create_package.js && cp src/collection.json dist"
+    "test": "jest",
+    "clean": "rm -Rf dist",
+    "build": "yarn clean && mkdir -p dist && node scripts/create_package.js && tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@angular-devkit/core": "^7.0.6",
+    "@angular-devkit/schematics": "^7.0.6",
+    "@schematics/angular": "^7.0.6",
+    "@types/jest": "23.3.10",
+    "@types/node": "^7.0.21",
+    "typescript": "~3.1.4"
   },
   "devDependencies": {
-    "@angular-devkit/core": "^0.5.4",
-    "@angular-devkit/schematics": "^0.5.4",
-    "@types/jasmine": "~2.8.3",
-    "@types/node": "^6.0.46",
-    "typescript": "~2.7.2"
+    "jest": "23.6.0",
+    "ts-jest": "23.10.5"
   }
 }

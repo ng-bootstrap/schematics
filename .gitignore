@@ -1,3 +1,16 @@
+# IDEs
+/.idea
+/.vscode
+/*.iml
+
+# Outputs
 dist
-node_modules
-yarn-error.log
+
+# Misc
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Mac OSX Finder files.
+**/.DS_Store
+.DS_Store
