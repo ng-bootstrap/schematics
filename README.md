@@ -1,20 +1,9 @@
 # @ng-bootstrap/schematics
 
-Scaffolding library for Angular applications using NgBootstrap
+This project is now archived, as schematics moved to the [`@ng-bootstrap/ng-bootstrap` repository directly](https://github.com/ng-bootstrap/ng-bootstrap).
 
-@ng-bootstrap/schematics provides CLI commands to initially add NgBootstrap to an existing application. This tool integrates with [`Angular CLI`](https://cli.angular.io/), and is built on top of [`Schematics`](https://blog.angular.io/schematics-an-introduction-dc1dfbc2a2b2).
+ng-bootstrap library can now be installed via
 
-## Usage
-
-Starting from an exiting Angular CLI scaffolded application, simply execute this command:
-
-```bash
-cd my-app
-ng add @ng-bootstrap/schematics
+```shell
+ng add @ng-bootstrap/ng-bootstrap
 ```
-
-Your app has now been ng-bootstrapped !
-
-## Contributing
-
-Please check [`DEVELOPER.md`](DEVELOPER.md) for developer documentation
